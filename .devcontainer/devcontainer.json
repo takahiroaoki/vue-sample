@@ -1,0 +1,17 @@
+{
+	"name": "vue-sample",
+	"dockerComposeFile": [
+		"docker-compose.app.yml"
+	],
+	"service": "vue-sample",
+	"workspaceFolder": "/mnt",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.vscode-typescript-next",
+				"ms-azuretools.vscode-docker",
+				"Vue.volar"
+			]
+		}
+	}
+}
