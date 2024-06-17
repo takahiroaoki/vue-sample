@@ -13,6 +13,8 @@ const incrementCount = (): void => {
   info.value.count += 1
 }
 
+const componentId = ref('component__id')
+
 </script>
 
 <template>
@@ -22,6 +24,10 @@ const incrementCount = (): void => {
 
   <p>Count: {{ info.count }}</p>
   <button @click="incrementCount">increment count</button>
+
+  <section>directive</section>
+  <p :componentId>component</p>
+  <p v-bind="{ componentId }">component</p>
 </template>
 
 <style scoped></style>
