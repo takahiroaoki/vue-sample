@@ -16,6 +16,7 @@ const incrementCount = (): void => {
 </script>
 
 <template>
+  <section>ref function</section>
   <p>Price: {{ price }}</p>
   <button @click="incrementPrice">increment price</button>
 
