@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, watch } from 'vue'
+import Greeting from './components/Greeting.vue'
 
 const price = ref(0)
 const incrementPrice = (): void => {
@@ -42,6 +43,8 @@ watch(
     console.log('old: ', oldValue)
   }
 )
+
+const greeting1 = ref('hello')
 </script>
 
 <template>
@@ -70,6 +73,10 @@ watch(
 
   <p>{{ countWatch2 }}</p>
   <button @click="countWatch2++">count up</button>
+
+  <Greeting v-bind="{ greeting1: greeting1, greeting2: 'good morning' }" />
+  <Greeting :greeting1="greeting1" greeting2="good morning2" />
+  <button @click="greeting1 = 'changed!'">change greeting1</button>
 </template>
 
 <style scoped></style>
