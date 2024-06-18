@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect, watch } from 'vue'
 
 const price = ref(0)
 const incrementPrice = (): void => {
@@ -21,6 +21,27 @@ const score = ref(0)
 const evaluation = computed(() => (
   score.value % 2 == 0 ? 'Even' : 'Odd'
 ))
+
+const countWatch = ref(0)
+watchEffect(() => {
+  console.log('countWatch was modified!')
+  console.log(countWatch.value)
+})
+
+const countWatch2 = ref(0)
+watch(countWatch2, (newValue, oldValue) => {
+  console.log('new: ', newValue)
+  console.log('old: ', oldValue)
+})
+
+watch(
+  () => (countWatch.value + countWatch2.value),
+  (newValue, oldValue) => {
+    console.log('watch 2 values sum')
+    console.log('new: ', newValue)
+    console.log('old: ', oldValue)
+  }
+)
 </script>
 
 <template>
@@ -43,6 +64,12 @@ const evaluation = computed(() => (
   <p>{{ evaluation }}</p>
   <p>{{ score }}</p>
   <button @click="score++">count up</button>
+
+  <p>{{ countWatch }}</p>
+  <button @click="countWatch++">count up</button>
+
+  <p>{{ countWatch2 }}</p>
+  <button @click="countWatch2++">count up</button>
 </template>
 
 <style scoped></style>
