@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, watchEffect, watch } from 'vue'
+import { ref, computed, watchEffect, watch, onMounted } from 'vue'
 import Greeting from './components/Greeting.vue'
+import EventEmitter from './components/EventEmitter.vue'
 
 const price = ref(0)
 const incrementPrice = (): void => {
@@ -45,6 +46,12 @@ watch(
 )
 
 const greeting1 = ref('hello')
+
+const emitter = ref<InstanceType<typeof EventEmitter> | null>(null)
+  const onEmit = (payload: string) => {
+  emitter.value!.doSomething(payload + 'is called from App.vue!')
+}
+
 </script>
 
 <template>
@@ -77,6 +84,8 @@ const greeting1 = ref('hello')
   <Greeting v-bind="{ greeting1: greeting1, greeting2: 'good morning' }" />
   <Greeting :greeting1="greeting1" greeting2="good morning2" />
   <button @click="greeting1 = 'changed!'">change greeting1</button>
+
+  <EventEmitter ref="emitter" @button-pushed="onEmit"></EventEmitter>
 </template>
 
 <style scoped></style>
